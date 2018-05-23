@@ -5,6 +5,7 @@ OS := $(shell uname)
 RELEASE_VERSION := $(shell cat ../../VERSION)
 
 init:
+	helm init --client-only
 	helm repo add stable https://kubernetes-charts.storage.googleapis.com
 
 build: clean init
@@ -28,7 +29,6 @@ clean:
 release: clean init
 	helm dependency build
 	helm lint
-	helm init --client-only
 	helm package .
 	curl --fail -u $(CHARTMUSEUM_CREDS_USR):$(CHARTMUSEUM_CREDS_PSW) --data-binary "@$(NAME)-$(shell sed -n 's/^version: //p' Chart.yaml).tgz" $(CHART_REPO)/api/charts
 	rm -rf ${NAME}*.tgz%
