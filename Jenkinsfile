@@ -23,7 +23,7 @@ pipeline {
             sh "mvn install"
 
             dir ('./target') {
-              sh 'export VERSION=$PREVIEW_VERSION && skaffold run -f skaffold.yaml'
+              sh 'export VERSION=$PREVIEW_VERSION && skaffold run -f ../skaffold.yaml'
             }
 
             sh "jx step validate --min-jx-version 1.2.36"
@@ -62,7 +62,7 @@ pipeline {
             sh 'mvn clean deploy'
 
             dir ('./target') {
-              sh 'export VERSION=`cat VERSION` && skaffold run -f skaffold.yaml'
+              sh 'export VERSION=`cat VERSION` && skaffold run -f ../skaffold.yaml'
             }
             
             sh "jx step validate --min-jx-version 1.2.36"
