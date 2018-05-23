@@ -1,14 +1,13 @@
-FROM openjdk:8-jdk-slim
-ENV PORT 8080
-ENV CLASSPATH /opt/lib
+FROM openjdk:8-jre-alpine
+
+ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
+    JHIPSTER_SLEEP=0 \
+    JAVA_OPTS=""
+
+CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && \
+    sleep ${JHIPSTER_SLEEP} && \
+    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.war
+
 EXPOSE 8080
 
-# copy pom.xml and wildcards to avoid this command failing if there's no target/lib directory
-COPY pom.xml target/lib* /opt/lib/
-
-# NOTE we assume there's only 1 jar in the target dir
-# but at least this means we don't have to guess the name
-# we could do with a better way to know the name - or to always create an app.jar or something
-COPY target/*.jar /opt/app.jar
-WORKDIR /opt
-CMD ["java", "-jar", "app.jar"]
+ADD *.war /app.war
