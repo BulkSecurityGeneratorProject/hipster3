@@ -4,7 +4,10 @@ NAME := hipster3
 OS := $(shell uname)
 RELEASE_VERSION := $(shell cat ../../VERSION)
 
-build: clean
+init:
+	helm repo add stable https://kubernetes-charts.storage.googleapis.com
+
+build: clean init
 	rm -rf requirements.lock
 	helm dependency build
 	helm lint
@@ -22,7 +25,7 @@ clean:
 	rm -rf charts
 	rm -rf ${NAME}*.tgz
 
-release: clean
+release: clean init
 	helm dependency build
 	helm lint
 	helm init --client-only
