@@ -7,7 +7,8 @@ build:
   artifacts:
   - imageName: changeme
     workspace: .
-    docker: {}
+    docker:
+      dockerfilePath: src/main/docker/Dockerfile
   local: {}
 deploy:
   kubectl:
@@ -19,7 +20,8 @@ profiles:
       envTemplate:
         template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/jstrachan/hipster3:{{.DIGEST_HEX}}"
     artifacts:
-    - docker: {}
+    - docker:
+        dockerfilePath: src/main/docker/Dockerfile
     local: {}
   deploy:
     helm:
