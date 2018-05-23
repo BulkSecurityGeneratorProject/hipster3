@@ -1,0 +1,5 @@
+dependencies:
+- alias: hipster3-db
+  name: stable/postgresql
+  repository: https://chartmuseum.build.cd.jenkins-x.io
+  version: 0.12.0
