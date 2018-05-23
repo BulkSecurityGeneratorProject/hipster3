@@ -6,7 +6,7 @@ build:
       template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/jstrachan/hipster3:{{.VERSION}}"
   artifacts:
   - imageName: changeme
-    workspace: target
+    workspace: .
     docker: {}
   local: {}
 deploy:
@@ -20,7 +20,7 @@ profiles:
         template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/jstrachan/hipster3:{{.DIGEST_HEX}}"
     artifacts:
     - docker: {}
-      workspace: target
+      workspace: .
     local: {}
   deploy:
     helm:
