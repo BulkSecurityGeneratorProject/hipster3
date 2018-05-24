@@ -34,3 +34,4 @@ terminationGracePeriodSeconds: 10
 
 ## configure the database
 hipster3-db:
+

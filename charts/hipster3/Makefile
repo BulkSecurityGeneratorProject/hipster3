@@ -7,7 +7,6 @@ RELEASE_VERSION := $(shell cat ../../VERSION)
 setup:
 	helm init --client-only
 	helm repo add stable https://kubernetes-charts.storage.googleapis.com
-	helm repo update
 
 build: setup clean
 	rm -rf requirements.lock
