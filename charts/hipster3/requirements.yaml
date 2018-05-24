@@ -1,5 +1,5 @@
 dependencies:
-- alias: db
+- alias: hipster3db
   name: postgresql
   repository: https://kubernetes-charts.storage.googleapis.com
   version: 0.12.0

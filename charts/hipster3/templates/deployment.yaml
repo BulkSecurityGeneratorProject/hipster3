@@ -27,11 +27,11 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: prod
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://{{ template "fullname" . }}-db:5432/hipster3
+          value: "jdbc:postgresql://{{ template "fullname" . }}db:5432/hipster3"
         - name: SPRING_DATASOURCE_USERNAME
-          value: {{ .Values.hipster3-db.postgresUser }}
+          value: "{{ .Values.hipster3db.postgresUser }}"
         - name: SPRING_DATASOURCE_PASSWORD
-          value: {{ .Values.hipster3-db.postgresPassword }}
+          value: "{{ .Values.hipster3db.postgresPassword }}"
         - name: JHIPSTER_METRICS_LOGS_ENABLED
           value: 'true'
         - name: JHIPSTER_LOGGING_LOGSTASH_ENABLED
