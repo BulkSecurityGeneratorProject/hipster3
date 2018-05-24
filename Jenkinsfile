@@ -22,11 +22,9 @@ pipeline {
             sh 'mvn clean'
             sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
 
-            // install tools
-            sh 'mvn com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.9.4 -DyarnVersion=v1.3.2'
-
             // yarn install
             sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn'
+            //sh 'yarn'
 
             // back end tests
             sh 'mvn test'
@@ -76,11 +74,9 @@ pipeline {
           container('maven') {
             sh 'mvn clean'
 
-            // install tools
-            sh 'mvn com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.9.4 -DyarnVersion=v1.3.2'
-
             // yarn install
             sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn'
+            //sh 'yarn'
 
             // back end tests
             sh 'mvn install'
