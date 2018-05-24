@@ -33,7 +33,7 @@ readinessProbe:
 terminationGracePeriodSeconds: 10
 
 ## configure the database
-db:
+hipster3-db:
   postgresUser: myusername
   postgresPassword: mysecret
 
