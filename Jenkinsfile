@@ -29,10 +29,10 @@ pipeline {
             sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn'
 
             // back end tests
-            sh "mvn test
+            sh 'mvn test'
 
             // front end tests
-            sh "mvn com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
+            sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test'
 
             // tests
             sh 'mvn verify -Pprod'
@@ -86,7 +86,7 @@ pipeline {
             sh 'mvn install'
 
             // front end tests
-            sh "mvn com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
+            sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test'
 
             // packaging
             sh 'mvn verify -Pprod -DskipTests'
