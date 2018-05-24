@@ -29,10 +29,13 @@ pipeline {
             sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn'
 
             // back end tests
-            sh "mvn install"
+            sh "mvn test
 
             // front end tests
-            sh "com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
+            sh "mvn com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
+
+            // tests
+            sh 'mvn verify -Pprod'
 
             dir ('./target') {
               sh 'export VERSION=$PREVIEW_VERSION && skaffold run -f ../skaffold.yaml'
@@ -83,10 +86,10 @@ pipeline {
             sh 'mvn install'
 
             // front end tests
-            sh "com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
+            sh "mvn com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
 
             // packaging
-            sh 'verify -Pprod -DskipTests'
+            sh 'mvn verify -Pprod -DskipTests'
 
             //sh 'mvn deploy'
 
