@@ -34,4 +34,6 @@ terminationGracePeriodSeconds: 10
 
 ## configure the database
 hipster3-db:
+  postgresUser: hipster3
+  postgresPassword: ""
 
