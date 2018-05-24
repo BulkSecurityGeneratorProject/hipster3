@@ -10,11 +10,6 @@ setup:
 	helm repo update
 
 build: setup clean
-	helm dependency build
-	helm lint
-
-
-build: setup clean
 	rm -rf requirements.lock
 	helm dependency build
 	helm lint
