@@ -26,7 +26,7 @@ profiles:
     helm:
       releases:
       - name: hipster3
-        chartPath: charts/hipster3
+        chartPath: ../charts/hipster3
         setValueTemplates:
           image.repository: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/jstrachan/hipster3"
           image.tag: "{{.TAG}}"

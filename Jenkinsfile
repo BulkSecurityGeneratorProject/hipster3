@@ -19,8 +19,20 @@ pipeline {
         }
         steps {
           container('maven') {
+            sh 'mvn clean'
             sh "mvn versions:set -DnewVersion=$PREVIEW_VERSION"
+
+            // install tools
+            sh 'mvn com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.9.4 -DyarnVersion=v1.3.2'
+
+            // yarn install
+            sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn'
+
+            // back end tests
             sh "mvn install"
+
+            // front end tests
+            sh "com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
 
             dir ('./target') {
               sh 'export VERSION=$PREVIEW_VERSION && skaffold run -f ../skaffold.yaml'
@@ -59,7 +71,24 @@ pipeline {
             }
           }
           container('maven') {
-            sh 'mvn clean deploy'
+            sh 'mvn clean'
+
+            // install tools
+            sh 'mvn com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.9.4 -DyarnVersion=v1.3.2'
+
+            // yarn install
+            sh 'mvn com.github.eirslett:frontend-maven-plugin:yarn'
+
+            // back end tests
+            sh 'mvn install'
+
+            // front end tests
+            sh "com.github.eirslett:frontend-maven-plugin:yarn -Dfrontend.yarn.arguments=test"
+
+            // packaging
+            sh 'verify -Pprod -DskipTests'
+
+            //sh 'mvn deploy'
 
             dir ('./target') {
               sh 'export VERSION=`cat ../VERSION` && skaffold run -f ../skaffold.yaml'
